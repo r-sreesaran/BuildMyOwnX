@@ -41,4 +41,14 @@ class WordProcessorTest {
         System.out.println(processor.getNumberofWordsAndLines(processor.readFile(options[2]))[2]);
     }
 
+    @Test
+    void testPipedOperation() throws URISyntaxException,IOException {
+        WordProcessor processor = new WordProcessor();
+        String[] options =   processor.processCommand("cat test.txt | ccwc -l");
+        assertEquals(options[1],"-w");
+        System.out.println(options[2]);
+        System.out.println(processor.getNumberofWordsAndLines(processor.readFile(options[2]))[1]);
+        System.out.println("The char count is  : ");
+        System.out.println(processor.getNumberofWordsAndLines(processor.readFile(options[2]))[2]);
+    }
 }
