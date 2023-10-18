@@ -25,38 +25,40 @@ class WordProcessorTest {
         processor.operation("cwcc -l test.txt");
         String[] options =   processor.processCommand("cwcc -l test.txt");
         assertEquals(options[1],"-l");
-        assertEquals(processor.getWordprocessorbean().getNo_of_lines(),7093);
+        assertEquals(7093,processor.getWordprocessorbean().getNo_of_lines());
     }
 
     @Test
     void testTotalNoOfCharacters() throws URISyntaxException,IOException {
         WordProcessor processor = new WordProcessor();
-        processor.operation("cwcc -m test1.txt");
-        assertEquals(processor.getWordprocessorbean().getTotal_no_of_characters(),57983);
+        processor.operation("cwcc -m test.txt");
+        assertEquals(331043,processor.getWordprocessorbean().getTotal_no_of_characters());
     }
 
     @Test
     void testTotalNoOfWords() throws URISyntaxException,IOException {
         WordProcessor processor = new WordProcessor();
-        processor.operation("cwcc -w test1.txt");
-        assertEquals(processor.getWordprocessorbean().getTotal_no_of_words(),333938);
+        processor.operation("cwcc -w test.txt");
+        assertEquals(57983,processor.getWordprocessorbean().getTotal_no_of_words());
     }
 
     @Test
     void testPipedOperation() throws URISyntaxException,IOException {
         WordProcessor processor = new WordProcessor();
         processor.operation("cat test.txt | ccwc -l");
-        assertEquals(processor.getWordprocessorbean().getNo_of_lines(),7093);
+        assertEquals(7093,processor.getWordprocessorbean().getNo_of_lines());
 
     }
 
     @Test
     void testDefaultOperations() throws URISyntaxException,IOException {
         WordProcessor processor = new WordProcessor();
-        String[] options =   processor.processCommand("cat test.txt");
-        assertEquals(processor.getTotalSpace(processor.readFile(options[0])),"333938");
-        assertEquals(processor.getTotalSpace(processor.readFile(options[1])),"7093");
-        assertEquals(processor.getTotalSpace(processor.readFile(options[2])),"57983");
+        processor.operation("cat test.txt");
+        assertEquals(7093,processor.getWordprocessorbean().getNo_of_lines());
+        assertEquals(57983,processor.getWordprocessorbean().getTotal_no_of_words());
+        assertEquals(331043,processor.getWordprocessorbean().getTotal_no_of_characters());
+
+
     }
 
 }
