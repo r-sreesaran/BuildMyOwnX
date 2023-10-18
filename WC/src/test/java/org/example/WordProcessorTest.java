@@ -3,7 +3,6 @@ package org.example;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,7 +19,7 @@ class WordProcessorTest {
 
 
     @Test
-    void testTotalNoOfLines() throws URISyntaxException,IOException {
+    void testTotalNoOfLines() throws IOException {
         WordProcessor processor = new WordProcessor();
         processor.operation("cwcc -l test.txt");
         String[] options =   processor.processCommand("cwcc -l test.txt");
@@ -29,21 +28,21 @@ class WordProcessorTest {
     }
 
     @Test
-    void testTotalNoOfCharacters() throws URISyntaxException,IOException {
+    void testTotalNoOfCharacters() throws IOException {
         WordProcessor processor = new WordProcessor();
         processor.operation("cwcc -m test.txt");
         assertEquals(331043,processor.getWordprocessorbean().getTotal_no_of_characters());
     }
 
     @Test
-    void testTotalNoOfWords() throws URISyntaxException,IOException {
+    void testTotalNoOfWords() throws IOException {
         WordProcessor processor = new WordProcessor();
         processor.operation("cwcc -w test.txt");
         assertEquals(57983,processor.getWordprocessorbean().getTotal_no_of_words());
     }
 
     @Test
-    void testPipedOperation() throws URISyntaxException,IOException {
+    void testPipedOperation() throws IOException {
         WordProcessor processor = new WordProcessor();
         processor.operation("cat test.txt | ccwc -l");
         assertEquals(7093,processor.getWordprocessorbean().getNo_of_lines());
@@ -51,12 +50,12 @@ class WordProcessorTest {
     }
 
     @Test
-    void testDefaultOperations() throws URISyntaxException,IOException {
+    void testDefaultOperations() throws IOException {
         WordProcessor processor = new WordProcessor();
         processor.operation("cat test.txt");
+        assertEquals(333938,processor.getWordprocessorbean().getFile_size());
         assertEquals(7093,processor.getWordprocessorbean().getNo_of_lines());
         assertEquals(57983,processor.getWordprocessorbean().getTotal_no_of_words());
-        assertEquals(331043,processor.getWordprocessorbean().getTotal_no_of_characters());
 
 
     }

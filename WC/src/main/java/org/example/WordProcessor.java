@@ -5,8 +5,6 @@ import java.io.*;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 
 public class WordProcessor {
 
@@ -25,8 +23,8 @@ public class WordProcessor {
     int total_no_of_characters = 0;
 
 
-    public static void main(String args[]) throws URISyntaxException, IOException {
-        Scanner scanner = new Scanner(System.in).useDelimiter("\\n");;
+    public static void main(String args[]) throws  IOException {
+        Scanner scanner = new Scanner(System.in).useDelimiter("\\n");
         String input = scanner.next();
         WordProcessor processor = new WordProcessor();
         processor.operation(input);
@@ -54,15 +52,14 @@ public class WordProcessor {
         return arguments;
     }
 
-    public File readFile(String fileName) throws URISyntaxException, IOException {
+    public File readFile(String fileName) {
         //File fileObj = new File(file);
         //Path path = Paths.get(getClass().getClassLoader().getResource(fileName).toURI());
 
         ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource(fileName).getFile());
-        file.getUsableSpace();
+
         //System.out.println(file.getAbsolutePath());
-        return file;
+        return new File(classLoader.getResource(fileName).getFile());
 
     }
 
@@ -74,13 +71,10 @@ public class WordProcessor {
 
     /**
      * This will return the total no of lines, total no of words and total no of characters  in a file s
-     *
-     * @param file
-     * @return
-     * @throws IOException
+     * @param file input file
+     * @throws IOException when the input file is missing
      */
-    public int[] getNumberofWordsAndLines(File file) throws IOException {
-        StringBuilder resultStringBuilder = new StringBuilder();
+    public void getNumberofWordsAndLines(File file) throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream(file.getName());
 
@@ -98,15 +92,13 @@ public class WordProcessor {
                         }
                     }
                 }
-                resultStringBuilder.append(line).append("\n");
                 no_of_lines++;
             }
         }
 
-        return new int[]{no_of_lines, total_no_of_words, total_no_of_characters};
     }
 
-    public void operation(String command) throws URISyntaxException, IOException {
+    public void operation(String command) throws IOException {
         String[] arguments = processCommand(command);
         String option;
         String fileName;
@@ -119,51 +111,38 @@ public class WordProcessor {
              fileName = arguments[2];
         }
 
-
-        /**
-         *  -l returns the number of lines in the file
-         *  -w returns the number of words in the file
-         *  -c returns the number of bytes in the file
-         *  -m returns the number of characters in the file
-         *  if no option is specified return the values of -c -l -w
-         */
         getNumberofWordsAndLines(readFile(fileName));
         switch (option) {
             case "-l":
                 wordprocessorbean.setNo_of_lines(no_of_lines);
                 System.out.print(no_of_lines+"\t");
-                System.out.print(fileName);
-                System.out.println("");
+                System.out.print(fileName+"\n");
                 break;
             case "-c":
                 wordprocessorbean.setFile_size(getTotalSpace(readFile(fileName)));
                 System.out.print(getTotalSpace(readFile(fileName))+"\t");
-                System.out.print(fileName);
-                System.out.println("");
+                System.out.print(fileName+"\n");
                 break;
             case "-w":
                 wordprocessorbean.setTotal_no_of_words(total_no_of_words);
                 System.out.print(total_no_of_words+"\t");
-                System.out.print(fileName);
-                System.out.println("");
+                System.out.print(fileName+"\n");
                 break;
             case "-m":
                 wordprocessorbean.setTotal_no_of_characters(total_no_of_characters);
                 System.out.print(total_no_of_characters+"\t");
-                System.out.print(fileName);
-                System.out.println("");
+                System.out.print(fileName+"\n");
                 break;
 
             default:
                 wordprocessorbean.setNo_of_lines(no_of_lines);
                 wordprocessorbean.setTotal_no_of_words(total_no_of_words);
-                wordprocessorbean.setTotal_no_of_characters(total_no_of_characters);
+                wordprocessorbean.setFile_size(getTotalSpace(readFile(fileName)));
 
-                System.out.print(getTotalSpace(readFile(fileName))+"\t");
                 System.out.print(no_of_lines+"\t");
                 System.out.print(total_no_of_words+"\t");
-                System.out.print(fileName);
-                System.out.println("");
+                System.out.print(getTotalSpace(readFile(fileName))+"\t");
+                System.out.print(fileName+"\n");
 
         }
 
