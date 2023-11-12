@@ -11,10 +11,11 @@ https://codingchallenges.fyi/challenges/challenge-wc
 The WC tool is written in Java. To execute the command, you need to clone the repository and run it in Intellj
 
 #### Todo 
-A shell script to execute it as command line utility 
-Code refractoring to improve readability and modifibility for future use
-Add my learning as part of this project. 
-use git actions to publish a artifact
+- A shell script to execute it as command line utility 
+- Code refractoring to improve readability and modifibility for future use
+- Add my learning as part of this project. 
+- use git actions to publish a artifact
+- see how to read a file from memory https://www.baeldung.com/java-read-lines-large-file
 
 #### tips/links
     // TODO is to see how get the file size with out loading into the memory
