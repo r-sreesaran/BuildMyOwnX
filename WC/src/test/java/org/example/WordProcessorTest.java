@@ -60,4 +60,8 @@ class WordProcessorTest {
 
     }
 
+    // TODO is to see how get the file size with out loading into the memory
+    //https://stackoverflow.com/questions/7106775/how-to-download-large-files-without-memory-issues-in-java
+    //https://unix.stackexchange.com/questions/101332/generate-file-of-a-certain-size
+
 }
