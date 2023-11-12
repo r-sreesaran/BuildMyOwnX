@@ -18,12 +18,12 @@ The WC tool is written in Java. To execute the command, you need to clone the re
 - see how to read a file from memory https://www.baeldung.com/java-read-lines-large-file
 
 #### tips/links
-    // TODO is to see how get the file size with out loading into the memory
-    // https://stackoverflow.com/questions/7106775/how-to-download-large-files-without-memory-issues-in-java
-    // https://unix.stackexchange.com/questions/101332/generate-file-of-a-certain-size
-    // http://jcommander.org/ -> see if this can be used 
-    // https://stackoverflow.com/questions/367706/how-do-i-parse-command-line-arguments-in-java
-    // https://commons.apache.org/proper/commons-cli/usage.html
+    - TODO is to see how get the file size with out loading into the memory
+    - https://stackoverflow.com/questions/7106775/how-to-download-large-files-without-memory-issues-in-java
+    - https://unix.stackexchange.com/questions/101332/generate-file-of-a-certain-size
+    - http://jcommander.org/ -> see if this can be used 
+    - https://stackoverflow.com/questions/367706/how-do-i-parse-command-line-arguments-in-java
+    - https://commons.apache.org/proper/commons-cli/usage.html
 
 
 ## JSON Parser problem design 
